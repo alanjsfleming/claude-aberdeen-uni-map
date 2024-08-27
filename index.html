@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of Aberdeen Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 80%;
+            width: 100%;
+        }
+        .info {
+            padding: 10px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h1>University of Aberdeen Map</h1>
+        <p>This map shows the main buildings and departments of the University of Aberdeen.</p>
+        <p><strong>Prompt:</strong> "Generate a site that I can publish with GitHub pages that is a map of Aberdeen in Scotland with the Aberdeen university and markers for which department is in which building. Include this prompt somewhere on the website so you can see which prompt built it. Also mention that you created it."</p>
+        <p><em>Created by Claude, an AI assistant.</em></p>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([57.165, -2.101], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var buildings = [
+            {name: "King's College", dept: "Arts and Social Sciences", lat: 57.1617, lon: -2.1004},
+            {name: "Sir Duncan Rice Library", dept: "University Library", lat: 57.1651, lon: -2.1018},
+            {name: "Fraser Noble Building", dept: "Engineering", lat: 57.1667, lon: -2.0993},
+            {name: "Zoology Building", dept: "Biological Sciences", lat: 57.1689, lon: -2.0964},
+            {name: "Meston Building", dept: "Physical Sciences", lat: 57.1675, lon: -2.1005},
+            {name: "MacRobert Building", dept: "Medicine and Dentistry", lat: 57.1658, lon: -2.1031},
+            {name: "Edward Wright Building", dept: "Business School", lat: 57.1673, lon: -2.1057}
+        ];
+
+        buildings.forEach(function(building) {
+            L.marker([building.lat, building.lon]).addTo(map)
+                .bindPopup("<b>" + building.name + "</b><br>" + building.dept);
+        });
+    </script>
+</body>
+</html>
